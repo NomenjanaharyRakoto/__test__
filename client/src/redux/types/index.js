@@ -1,0 +1,7 @@
+export const types = {
+    GET_CARS: "GET_CARS",
+    GET_CAR: "GET_CAR",
+    GET_ERRORS: "GET_ERRORS",
+    CLEAR_ERRORS: "CLEAR_ERRORS",
+    IS_LOADING: "IS_LOADING"
+}
