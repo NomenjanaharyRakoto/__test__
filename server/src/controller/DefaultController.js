@@ -1,7 +1,7 @@
 const { errorMessage } = require('../utils/utils')
 const Car = require('../model/Car')
 
-module.exports = DefaultController = (Model) => {
+exports.DefaultController = (Model) => {
     async function createUpdate(req, res) {
         const data = req.body
 
@@ -56,5 +56,22 @@ module.exports = DefaultController = (Model) => {
         getAll,
         remove,
         findByProperty,
+    }
+}
+
+exports.ExtraFunction = (Model, Params) => {
+    async function findByPropertyWithPopulate(req, res) {
+        await Model.find({
+            [req.params.PROPERTY]: req.params.ID
+        }).populate(Params).then(response => {
+            return res.status(200).json(response)
+        }).catch(err => {
+            return res.status(200).json(errorMessage(err._message))
+        })
+
+    }
+
+    return {
+        findByPropertyWithPopulate,
     }
 }
