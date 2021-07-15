@@ -20,7 +20,7 @@ const Comments = ({ comments, loader, props }) => {
                                         />
                                    
                                 </b>
-                              { comment.owner.username} :  <b>{comment.body}</b>
+                                <b> { comment.owner.username}</b>  :  {comment.body}
                                 </p>
                         ))
                         :

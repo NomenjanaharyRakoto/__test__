@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Users = require('../model/User')
 const { errorMessage } = require('../utils/utils')
-const { error_email, error_mdp } = require('../utils/message')
+const { error_email, error_mdp, is_exist } = require('../utils/message')
 module.exports = UserController = {
     authentication: async(req, res) => {
 
@@ -46,8 +46,10 @@ module.exports = UserController = {
                 res.status(201).json(response)
 
             }).catch(err => {
-                console.log(err, '<===== ERROR');
-                return err
+                if (err && err.code === 11000) {
+                    return res.status(201).json(errorMessage(is_exist))
+                }
+                throw err
             })
         } else {
             Users.findOneAndUpdate({ _id: data._id }, { $set: {...data, updatedAt: Date.now() } }).then(() => {
