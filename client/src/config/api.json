@@ -1,5 +1,8 @@
 {
-    "cars": {
-        "get": "cars"
+    "route": {
+        "auth": "users/login",
+        "register": "users",
+        "cars": "cars",
+        "comments": "comments"
     }
 }

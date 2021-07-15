@@ -35,7 +35,6 @@ module.exports = UserController = {
 
     createUpdate: async(req, res) => {
         const data = req.body
-
         if (!data._id) {
             const salt = await bcrypt.genSalt(10);
 
