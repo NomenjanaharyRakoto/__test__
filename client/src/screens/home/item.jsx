@@ -33,8 +33,8 @@ const Item = (props) => {
                 <Col md="7">
                     <img src={ car.image} alt="car" className="rounded"/>
                     <div className="project-info-box">
-                        <p><b>Couleur:</b>   <span className="color" style={{backgroundColor:car.color}}></span></p>
-                        <p><b>Matricule:</b> { car.matricule}</p>
+                        <p><b style={{marginRight:5}} >Couleur :</b>   <span className="color" style={{backgroundColor:car.color}}></span></p>
+                        <p><b>Matricule :</b> { car.matricule}</p>
                     </div>
                 </Col>
             </Row>
