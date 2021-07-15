@@ -1,4 +1,4 @@
-import { types } from '../types'
+import { GET_CAR, GET_CARS } from '../types'
 
 const initialState = {
     cars: [],
@@ -7,9 +7,9 @@ const initialState = {
 
 const carsReduces = (state = initialState, { type, payload }) => {
     switch (type) {
-        case types.GET_CARS:
+        case GET_CARS:
             return {...state, cars: payload }
-        case types.GET_CAR:
+        case GET_CAR:
             return {...state, car: payload }
         default:
             return state;

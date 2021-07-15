@@ -1,7 +1,5 @@
-export const types = {
-    GET_CARS: "GET_CARS",
-    GET_CAR: "GET_CAR",
-    GET_ERRORS: "GET_ERRORS",
-    CLEAR_ERRORS: "CLEAR_ERRORS",
-    IS_LOADING: "IS_LOADING"
-}
+export const GET_CARS = "GET_CARS"
+export const GET_CAR = "GET_CAR"
+export const GET_ERRORS = "GET_ERRORS"
+export const CLEAR_ERRORS = "CLEAR_ERRORS"
+export const IS_LOADING = "IS_LOADING"
