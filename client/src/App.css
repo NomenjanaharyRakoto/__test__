@@ -138,5 +138,12 @@ img {
     display: flex;
 }
 
+img.react-gravatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 20px;
+}
+
 
 /* facebook button */

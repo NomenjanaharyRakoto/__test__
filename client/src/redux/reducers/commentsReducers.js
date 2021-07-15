@@ -1,4 +1,4 @@
-import { GET_COMMENTS } from '../types'
+import { GET_COMMENTS, SET_COMMENTS } from '../types'
 
 const initialState = {
     comments: [],
@@ -8,6 +8,7 @@ const initialState = {
 const commentsReducers = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_COMMENTS:
+        case SET_COMMENTS:
             return {...state, comments: payload }
 
         default:
