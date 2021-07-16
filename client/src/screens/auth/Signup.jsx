@@ -4,21 +4,26 @@ import {Alert, Spinner} from 'react-bootstrap'
 import { register } from '../../redux/actions/userAction'
 import { cleanErrors } from '../../redux/actions/errorAction'
 import { useHistory } from "react-router-dom"
-
+import { submit } from '../../services/technique/submit'
 const Login = (props) => {
     const { register, loader , error:{message}, cleanErrors} = props
     const [user, setUser] = useState({})
+    const [error, setError] = useState('')
     const history = useHistory()
 
     const registerAction = () => {
-        register(user).then(res=> {
-            if (res && !res.error) {
-                history.push('/login')
-            }
-        })
+        submit(['username', 'email', 'password'], user, setError)
+        if (!error) {
+            register(user).then(res=> {
+                if (res && !res.error) {
+                    history.push('/login')
+                }
+            })
+        }
     }
     const handleValueChange = (event, key) => {
         cleanErrors()
+        setError('')
         setUser({...user, [key]:event.target.value})
     }
 
@@ -29,9 +34,9 @@ const Login = (props) => {
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
-                {message.message ?
+                {message.message || error ?
                     <Alert variant="danger">
-                    {message.message}
+                    {error ? error : message.message}
                 </Alert>:null
                 }
                 <form>

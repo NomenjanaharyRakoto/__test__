@@ -4,63 +4,69 @@ import {Alert, Spinner} from 'react-bootstrap'
 import { authetication } from '../../redux/actions/userAction'
 import { cleanErrors } from '../../redux/actions/errorAction'
 import { useHistory } from "react-router-dom"
-
+import { submit } from '../../services/technique/submit'
 const Login = (props) => {
     const { authetication, loader , error:{message}, cleanErrors, success_register} = props
     const [user, setUser] = useState({})
+    const [error, setError] = useState('')
     const history = useHistory()
     console.log(props);
 
     const authAction = () => {
-        authetication(user).then(res=> {
-            if (res && !res.error) {
-               history.push('/')
-            }
-        })
+        submit(['email', 'password'], user, setError)
+        if (!error) {
+            authetication(user).then(res => {
+                if (!res.error) {
+                   history.push('/')
+               }
+           })
+        }
     }
     const handleValueChange = (event, key) => {
         cleanErrors()
+        setError('')
         setUser({...user, [key]:event.target.value})
     }
+    
 
     return (
         <div className="auth-wrapper">
             <div className="auth-inner" style={{marginTop:10}}>
-               {success_register && <h3>Merci pour votre inscription connecter maintenant</h3>}
-                {message.message ?
+               {success_register && <h3>Thank you for registering log in now</h3>}
+                {message.message  || error?
                     <Alert variant="danger">
-                    {message.message}
+                    {error ? error  : message.message}
                 </Alert>:null
                 }
              <form>
                 <div className="form-group">
                     <label>Email address</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Enter email"
-                                onChange={(e)=>{handleValueChange(e,'email')}}
-                            />
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email"
+                            onChange={(e)=>{handleValueChange(e,'email')}}
+                        />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Enter password"
-                                onChange={(e)=>{handleValueChange(e,'password')}}
-                            />
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            onChange={(e)=>{handleValueChange(e,'password')}}
+                        />
                 </div>
 
                 <div className="form-group">
                 <div className="custom-control custom-checkbox">
-                            <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                id="customCheck1"
-                               onChange={(e)=>{handleValueChange(e,'rememberMe')}}
-                            />
+                    <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        id="customCheck1"
+                        onChange={(e)=>{handleValueChange(e,'rememberMe')}}
+                    />
                     <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                 </div>
             </div>
